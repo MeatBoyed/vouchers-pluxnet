@@ -1,0 +1,42 @@
+{
+    "vendors": [
+        {
+            "id": "08f5f93c-5d6c-4a62-843f-c9bcecf3a1a1",
+            "name": "Vendor One"
+        },
+        {
+            "id": "91b1c846-77f2-429a-9b47-fb5a49c3fc77",
+            "name": "Vendor Two"
+        }
+    ],
+    "vouchers": [
+        {
+            "id": "c2f5f9e4-1c77-4d94-88b1-4cc1a1e57f3a",
+            "code": "TEST1234",
+            "isRedeemed": false,
+            "sent": false
+        },
+        {
+            "id": "27a08a2e-fdf8-4899-9e6e-eaa37c7b4c2b",
+            "code": "TEST5678",
+            "isRedeemed": false,
+            "sent": false
+        },
+        {
+            "id": "8c5b3f2a-b70b-4a06-b6fb-23853e7deafd",
+            "code": "TEST9999",
+            "isRedeemed": false,
+            "sent": false
+        },
+        {
+            "id": "1d25b998-8108-4f26-8e34-6f212e41e2fc",
+            "code": "USED0001",
+            "isRedeemed": true,
+            "sent": true,
+            "redeemedAt": "2024-04-01T10:00:00Z",
+            "customerId": null,
+            "vendorId": "08f5f93c-5d6c-4a62-843f-c9bcecf3a1a1",
+            "sentAt": "2024-04-01T09:59:00Z"
+        }
+    ]
+}
