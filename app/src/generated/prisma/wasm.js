@@ -146,7 +146,10 @@ exports.Prisma.VouchersScalarFieldEnum = {
   customer_id: 'customer_id',
   vendor_id: 'vendor_id',
   sent: 'sent',
-  sent_at: 'sent_at'
+  sent_at: 'sent_at',
+  type: 'type',
+  value: 'value',
+  description: 'description'
 };
 
 exports.Prisma.SortOrder = {

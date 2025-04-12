@@ -4418,8 +4418,18 @@ export namespace Prisma {
 
   export type AggregateVouchers = {
     _count: VouchersCountAggregateOutputType | null
+    _avg: VouchersAvgAggregateOutputType | null
+    _sum: VouchersSumAggregateOutputType | null
     _min: VouchersMinAggregateOutputType | null
     _max: VouchersMaxAggregateOutputType | null
+  }
+
+  export type VouchersAvgAggregateOutputType = {
+    value: number | null
+  }
+
+  export type VouchersSumAggregateOutputType = {
+    value: number | null
   }
 
   export type VouchersMinAggregateOutputType = {
@@ -4431,6 +4441,9 @@ export namespace Prisma {
     vendor_id: string | null
     sent: boolean | null
     sent_at: Date | null
+    type: string | null
+    value: number | null
+    description: string | null
   }
 
   export type VouchersMaxAggregateOutputType = {
@@ -4442,6 +4455,9 @@ export namespace Prisma {
     vendor_id: string | null
     sent: boolean | null
     sent_at: Date | null
+    type: string | null
+    value: number | null
+    description: string | null
   }
 
   export type VouchersCountAggregateOutputType = {
@@ -4453,9 +4469,20 @@ export namespace Prisma {
     vendor_id: number
     sent: number
     sent_at: number
+    type: number
+    value: number
+    description: number
     _all: number
   }
 
+
+  export type VouchersAvgAggregateInputType = {
+    value?: true
+  }
+
+  export type VouchersSumAggregateInputType = {
+    value?: true
+  }
 
   export type VouchersMinAggregateInputType = {
     id?: true
@@ -4466,6 +4493,9 @@ export namespace Prisma {
     vendor_id?: true
     sent?: true
     sent_at?: true
+    type?: true
+    value?: true
+    description?: true
   }
 
   export type VouchersMaxAggregateInputType = {
@@ -4477,6 +4507,9 @@ export namespace Prisma {
     vendor_id?: true
     sent?: true
     sent_at?: true
+    type?: true
+    value?: true
+    description?: true
   }
 
   export type VouchersCountAggregateInputType = {
@@ -4488,6 +4521,9 @@ export namespace Prisma {
     vendor_id?: true
     sent?: true
     sent_at?: true
+    type?: true
+    value?: true
+    description?: true
     _all?: true
   }
 
@@ -4529,6 +4565,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: VouchersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VouchersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: VouchersMinAggregateInputType
@@ -4559,6 +4607,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VouchersCountAggregateInputType | true
+    _avg?: VouchersAvgAggregateInputType
+    _sum?: VouchersSumAggregateInputType
     _min?: VouchersMinAggregateInputType
     _max?: VouchersMaxAggregateInputType
   }
@@ -4572,7 +4622,12 @@ export namespace Prisma {
     vendor_id: string | null
     sent: boolean | null
     sent_at: Date | null
+    type: string
+    value: number
+    description: string | null
     _count: VouchersCountAggregateOutputType | null
+    _avg: VouchersAvgAggregateOutputType | null
+    _sum: VouchersSumAggregateOutputType | null
     _min: VouchersMinAggregateOutputType | null
     _max: VouchersMaxAggregateOutputType | null
   }
@@ -4600,6 +4655,9 @@ export namespace Prisma {
     vendor_id?: boolean
     sent?: boolean
     sent_at?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
     voucher_logs?: boolean | vouchers$voucher_logsArgs<ExtArgs>
     customers?: boolean | vouchers$customersArgs<ExtArgs>
     vendors?: boolean | vouchers$vendorsArgs<ExtArgs>
@@ -4615,6 +4673,9 @@ export namespace Prisma {
     vendor_id?: boolean
     sent?: boolean
     sent_at?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
     customers?: boolean | vouchers$customersArgs<ExtArgs>
     vendors?: boolean | vouchers$vendorsArgs<ExtArgs>
   }, ExtArgs["result"]["vouchers"]>
@@ -4628,6 +4689,9 @@ export namespace Prisma {
     vendor_id?: boolean
     sent?: boolean
     sent_at?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
     customers?: boolean | vouchers$customersArgs<ExtArgs>
     vendors?: boolean | vouchers$vendorsArgs<ExtArgs>
   }, ExtArgs["result"]["vouchers"]>
@@ -4641,9 +4705,12 @@ export namespace Prisma {
     vendor_id?: boolean
     sent?: boolean
     sent_at?: boolean
+    type?: boolean
+    value?: boolean
+    description?: boolean
   }
 
-  export type vouchersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "is_redeemed" | "redeemed_at" | "customer_id" | "vendor_id" | "sent" | "sent_at", ExtArgs["result"]["vouchers"]>
+  export type vouchersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "is_redeemed" | "redeemed_at" | "customer_id" | "vendor_id" | "sent" | "sent_at" | "type" | "value" | "description", ExtArgs["result"]["vouchers"]>
   export type vouchersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voucher_logs?: boolean | vouchers$voucher_logsArgs<ExtArgs>
     customers?: boolean | vouchers$customersArgs<ExtArgs>
@@ -4675,6 +4742,9 @@ export namespace Prisma {
       vendor_id: string | null
       sent: boolean | null
       sent_at: Date | null
+      type: string
+      value: number
+      description: string | null
     }, ExtArgs["result"]["vouchers"]>
     composites: {}
   }
@@ -5109,6 +5179,9 @@ export namespace Prisma {
     readonly vendor_id: FieldRef<"vouchers", 'String'>
     readonly sent: FieldRef<"vouchers", 'Boolean'>
     readonly sent_at: FieldRef<"vouchers", 'DateTime'>
+    readonly type: FieldRef<"vouchers", 'String'>
+    readonly value: FieldRef<"vouchers", 'Int'>
+    readonly description: FieldRef<"vouchers", 'String'>
   }
     
 
@@ -5637,7 +5710,10 @@ export namespace Prisma {
     customer_id: 'customer_id',
     vendor_id: 'vendor_id',
     sent: 'sent',
-    sent_at: 'sent_at'
+    sent_at: 'sent_at',
+    type: 'type',
+    value: 'value',
+    description: 'description'
   };
 
   export type VouchersScalarFieldEnum = (typeof VouchersScalarFieldEnum)[keyof typeof VouchersScalarFieldEnum]
@@ -5718,6 +5794,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -5886,6 +5976,9 @@ export namespace Prisma {
     vendor_id?: UuidNullableFilter<"vouchers"> | string | null
     sent?: BoolNullableFilter<"vouchers"> | boolean | null
     sent_at?: DateTimeNullableFilter<"vouchers"> | Date | string | null
+    type?: StringFilter<"vouchers"> | string
+    value?: IntFilter<"vouchers"> | number
+    description?: StringNullableFilter<"vouchers"> | string | null
     voucher_logs?: Voucher_logsListRelationFilter
     customers?: XOR<CustomersNullableScalarRelationFilter, customersWhereInput> | null
     vendors?: XOR<VendorsNullableScalarRelationFilter, vendorsWhereInput> | null
@@ -5900,6 +5993,9 @@ export namespace Prisma {
     vendor_id?: SortOrderInput | SortOrder
     sent?: SortOrderInput | SortOrder
     sent_at?: SortOrderInput | SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrderInput | SortOrder
     voucher_logs?: voucher_logsOrderByRelationAggregateInput
     customers?: customersOrderByWithRelationInput
     vendors?: vendorsOrderByWithRelationInput
@@ -5917,6 +6013,9 @@ export namespace Prisma {
     vendor_id?: UuidNullableFilter<"vouchers"> | string | null
     sent?: BoolNullableFilter<"vouchers"> | boolean | null
     sent_at?: DateTimeNullableFilter<"vouchers"> | Date | string | null
+    type?: StringFilter<"vouchers"> | string
+    value?: IntFilter<"vouchers"> | number
+    description?: StringNullableFilter<"vouchers"> | string | null
     voucher_logs?: Voucher_logsListRelationFilter
     customers?: XOR<CustomersNullableScalarRelationFilter, customersWhereInput> | null
     vendors?: XOR<VendorsNullableScalarRelationFilter, vendorsWhereInput> | null
@@ -5931,9 +6030,14 @@ export namespace Prisma {
     vendor_id?: SortOrderInput | SortOrder
     sent?: SortOrderInput | SortOrder
     sent_at?: SortOrderInput | SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrderInput | SortOrder
     _count?: vouchersCountOrderByAggregateInput
+    _avg?: vouchersAvgOrderByAggregateInput
     _max?: vouchersMaxOrderByAggregateInput
     _min?: vouchersMinOrderByAggregateInput
+    _sum?: vouchersSumOrderByAggregateInput
   }
 
   export type vouchersScalarWhereWithAggregatesInput = {
@@ -5948,6 +6052,9 @@ export namespace Prisma {
     vendor_id?: UuidNullableWithAggregatesFilter<"vouchers"> | string | null
     sent?: BoolNullableWithAggregatesFilter<"vouchers"> | boolean | null
     sent_at?: DateTimeNullableWithAggregatesFilter<"vouchers"> | Date | string | null
+    type?: StringWithAggregatesFilter<"vouchers"> | string
+    value?: IntWithAggregatesFilter<"vouchers"> | number
+    description?: StringNullableWithAggregatesFilter<"vouchers"> | string | null
   }
 
   export type customersCreateInput = {
@@ -6111,6 +6218,9 @@ export namespace Prisma {
     redeemed_at?: Date | string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsCreateNestedManyWithoutVouchersInput
     customers?: customersCreateNestedOneWithoutVouchersInput
     vendors?: vendorsCreateNestedOneWithoutVouchersInput
@@ -6125,6 +6235,9 @@ export namespace Prisma {
     vendor_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsUncheckedCreateNestedManyWithoutVouchersInput
   }
 
@@ -6135,6 +6248,9 @@ export namespace Prisma {
     redeemed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUpdateManyWithoutVouchersNestedInput
     customers?: customersUpdateOneWithoutVouchersNestedInput
     vendors?: vendorsUpdateOneWithoutVouchersNestedInput
@@ -6149,6 +6265,9 @@ export namespace Prisma {
     vendor_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUncheckedUpdateManyWithoutVouchersNestedInput
   }
 
@@ -6161,6 +6280,9 @@ export namespace Prisma {
     vendor_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
   }
 
   export type vouchersUpdateManyMutationInput = {
@@ -6170,6 +6292,9 @@ export namespace Prisma {
     redeemed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type vouchersUncheckedUpdateManyInput = {
@@ -6181,6 +6306,9 @@ export namespace Prisma {
     vendor_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -6416,6 +6544,17 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type Voucher_logsListRelationFilter = {
     every?: voucher_logsWhereInput
     some?: voucher_logsWhereInput
@@ -6445,6 +6584,13 @@ export namespace Prisma {
     vendor_id?: SortOrder
     sent?: SortOrder
     sent_at?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
+  }
+
+  export type vouchersAvgOrderByAggregateInput = {
+    value?: SortOrder
   }
 
   export type vouchersMaxOrderByAggregateInput = {
@@ -6456,6 +6602,9 @@ export namespace Prisma {
     vendor_id?: SortOrder
     sent?: SortOrder
     sent_at?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
   }
 
   export type vouchersMinOrderByAggregateInput = {
@@ -6467,6 +6616,13 @@ export namespace Prisma {
     vendor_id?: SortOrder
     sent?: SortOrder
     sent_at?: SortOrder
+    type?: SortOrder
+    value?: SortOrder
+    description?: SortOrder
+  }
+
+  export type vouchersSumOrderByAggregateInput = {
+    value?: SortOrder
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6475,6 +6631,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type vouchersCreateNestedManyWithoutCustomersInput = {
@@ -6617,6 +6789,14 @@ export namespace Prisma {
 
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type voucher_logsUpdateManyWithoutVouchersNestedInput = {
@@ -6839,6 +7019,33 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type vouchersCreateWithoutCustomersInput = {
     id?: string
     code: string
@@ -6846,6 +7053,9 @@ export namespace Prisma {
     redeemed_at?: Date | string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsCreateNestedManyWithoutVouchersInput
     vendors?: vendorsCreateNestedOneWithoutVouchersInput
   }
@@ -6858,6 +7068,9 @@ export namespace Prisma {
     vendor_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsUncheckedCreateNestedManyWithoutVouchersInput
   }
 
@@ -6899,6 +7112,9 @@ export namespace Prisma {
     vendor_id?: UuidNullableFilter<"vouchers"> | string | null
     sent?: BoolNullableFilter<"vouchers"> | boolean | null
     sent_at?: DateTimeNullableFilter<"vouchers"> | Date | string | null
+    type?: StringFilter<"vouchers"> | string
+    value?: IntFilter<"vouchers"> | number
+    description?: StringNullableFilter<"vouchers"> | string | null
   }
 
   export type vouchersCreateWithoutVendorsInput = {
@@ -6908,6 +7124,9 @@ export namespace Prisma {
     redeemed_at?: Date | string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsCreateNestedManyWithoutVouchersInput
     customers?: customersCreateNestedOneWithoutVouchersInput
   }
@@ -6920,6 +7139,9 @@ export namespace Prisma {
     customer_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     voucher_logs?: voucher_logsUncheckedCreateNestedManyWithoutVouchersInput
   }
 
@@ -6956,6 +7178,9 @@ export namespace Prisma {
     redeemed_at?: Date | string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
     customers?: customersCreateNestedOneWithoutVouchersInput
     vendors?: vendorsCreateNestedOneWithoutVouchersInput
   }
@@ -6969,6 +7194,9 @@ export namespace Prisma {
     vendor_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
   }
 
   export type vouchersCreateOrConnectWithoutVoucher_logsInput = {
@@ -6994,6 +7222,9 @@ export namespace Prisma {
     redeemed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     customers?: customersUpdateOneWithoutVouchersNestedInput
     vendors?: vendorsUpdateOneWithoutVouchersNestedInput
   }
@@ -7007,6 +7238,9 @@ export namespace Prisma {
     vendor_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type voucher_logsCreateWithoutVouchersInput = {
@@ -7152,6 +7386,9 @@ export namespace Prisma {
     vendor_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
   }
 
   export type vouchersUpdateWithoutCustomersInput = {
@@ -7161,6 +7398,9 @@ export namespace Prisma {
     redeemed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUpdateManyWithoutVouchersNestedInput
     vendors?: vendorsUpdateOneWithoutVouchersNestedInput
   }
@@ -7173,6 +7413,9 @@ export namespace Prisma {
     vendor_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUncheckedUpdateManyWithoutVouchersNestedInput
   }
 
@@ -7184,6 +7427,9 @@ export namespace Prisma {
     vendor_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type vouchersCreateManyVendorsInput = {
@@ -7194,6 +7440,9 @@ export namespace Prisma {
     customer_id?: string | null
     sent?: boolean | null
     sent_at?: Date | string | null
+    type?: string
+    value?: number
+    description?: string | null
   }
 
   export type vouchersUpdateWithoutVendorsInput = {
@@ -7203,6 +7452,9 @@ export namespace Prisma {
     redeemed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUpdateManyWithoutVouchersNestedInput
     customers?: customersUpdateOneWithoutVouchersNestedInput
   }
@@ -7215,6 +7467,9 @@ export namespace Prisma {
     customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     voucher_logs?: voucher_logsUncheckedUpdateManyWithoutVouchersNestedInput
   }
 
@@ -7226,6 +7481,9 @@ export namespace Prisma {
     customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    value?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type voucher_logsCreateManyVouchersInput = {

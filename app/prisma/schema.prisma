@@ -41,6 +41,9 @@ model vouchers {
   vendor_id    String?        @db.Uuid
   sent         Boolean?       @default(false)
   sent_at      DateTime?      @db.Timestamp(6)
+  type         String         @default("daily")
+  value        Int            @default(5)
+  description  String?
   voucher_logs voucher_logs[]
   customers    customers?     @relation(fields: [customer_id], references: [id], onUpdate: NoAction)
   vendors      vendors?       @relation(fields: [vendor_id], references: [id], onUpdate: NoAction)

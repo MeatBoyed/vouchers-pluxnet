@@ -1,51 +1,73 @@
+import { errorHandler, MBVError } from "./errors";
 import prisma from "./prisma";
 
 export class VoucherService {
     async findOrCreateCustomer(phoneNumber: string) {
         try {
-            return await prisma.customer.upsert({
-                where: { phoneNumber },
+            return await prisma.customers.upsert({
+                where: { phone_number: phoneNumber },
                 update: {},
-                create: { phoneNumber }
+                create: { phone_number: phoneNumber }
             });
-        } catch (error: any) {
-            throw new Error(`Failed to create or retrieve customer: ${error.message}`);
+        } catch (error) {
+            console.error(`Failed to create or retrieve customer: ${error instanceof Error ? error.message : "Unknown error"}`);
+            throw errorHandler(error)
+        }
+    }
+
+    async getVendors() {
+        try {
+            return await prisma.vendors.findMany();
+        } catch (error) {
+            console.error(`Failed to retrieve vendors: ${error instanceof Error ? error.message : "Unknown error"}`);
+            throw errorHandler(error)
         }
     }
 
     async getVendorById(vendorId: string) {
-        const vendor = await prisma.vendor.findUnique({ where: { id: vendorId } });
+        const vendor = await prisma.vendors.findUnique({ where: { id: vendorId } });
         if (!vendor) {
-            throw new Error("Vendor not found.");
+            console.error("Vendor not found.");
+            throw new MBVError(
+                "Vendor not found",
+                "VENDOR_NOT_FOUND",
+                `Vendor with ID ${vendorId} does not exist.`
+            );
         }
         return vendor;
     }
 
-    async getAvailableVoucher() {
-        const voucher = await prisma.voucher.findFirst({
-            where: { isRedeemed: false, sent: false }
+    async getAvailableVoucher(voucherType: string) {
+        const voucher = await prisma.vouchers.findFirst({
+            where: { is_redeemed: false, sent: false, type: voucherType }
         });
         if (!voucher) {
-            throw new Error("No available vouchers.");
+            console.error("No available vouchers.");
+            throw new MBVError(
+                "No available vouchers",
+                "NO_VOUCHERS_AVAILABLE",
+                `No vouchers available for type ${voucherType}.`
+            );
         }
         return voucher;
     }
 
     async markVoucherAsSent(voucherId: string, customerId: string, vendorId: string) {
         try {
-            return await prisma.voucher.update({
+            return await prisma.vouchers.update({
                 where: { id: voucherId },
                 data: {
-                    isRedeemed: true,
-                    redeemedAt: new Date(),
-                    customerId,
-                    vendorId,
+                    is_redeemed: true,
+                    redeemed_at: new Date(),
+                    customer_id: customerId,
+                    vendor_id: vendorId,
                     sent: true,
-                    sentAt: new Date()
+                    sent_at: new Date()
                 }
             });
-        } catch (error: any) {
-            throw new Error(`Failed to mark voucher as sent: ${error.message}`);
+        } catch (error) {
+            console.error(`Failed to mark voucher as sent: ${error instanceof Error ? error.message : "Unknown error"}`);
+            throw errorHandler(error)
         }
     }
 }
