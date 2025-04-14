@@ -66,7 +66,7 @@ export class VoucherService {
             //     type: voucher.type,
             //     count: voucher._count.type
             // }))
-
+            if (!vouchers || vouchers.length === 0) return []
             return vouchers.map(voucher => {
                 switch (voucher.type) {
                     case "daily":
@@ -86,6 +86,12 @@ export class VoucherService {
                             type: voucher.type,
                             count: voucher._count.type,
                             price: "R99"
+                        }
+                    default:
+                        return {
+                            type: "",
+                            count: 0,
+                            price: ""
                         }
                 }
             })
