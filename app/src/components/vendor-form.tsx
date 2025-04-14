@@ -17,6 +17,7 @@ import { PhoneInput } from "./ui/phone-input"
 import { vendors } from "@prisma/client"
 import Link from "next/link"
 import { toast } from "sonner"
+import { MBVError } from "@/lib/errors"
 
 const VoucherTypes = [
     "daily", "weekly", "monthly"
@@ -77,9 +78,15 @@ export default function VendorForm({ vendors }: { vendors: vendors[] }) {
 
         } catch (error) {
             console.error(error);
-            toast.error("Failed to send voucher", {
-                description: "An error occurred while sending the voucher. Please try again. If the error persists please contact our support team.",
-            })
+            if (error instanceof MBVError) {
+                toast.error("Failed to send voucher", {
+                    description: `${error.code} - ${error.message}`,
+                })
+            } else {
+                toast.error("Failed to send voucher", {
+                    description: "An error occurred while sending the voucher. Please try again. If the error persists please contact our support team.",
+                })
+            }
             setServerError(error instanceof Error ? error.message : "An Unexpected error occured.");
         } finally {
             setIsSubmitting(false);
