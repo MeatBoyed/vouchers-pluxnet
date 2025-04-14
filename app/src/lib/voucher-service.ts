@@ -62,10 +62,33 @@ export class VoucherService {
                     type: true
                 }
             })
-            return vouchers.map(voucher => ({
-                type: voucher.type,
-                count: voucher._count.type
-            }))
+            // return vouchers.map(voucher => ({
+            //     type: voucher.type,
+            //     count: voucher._count.type
+            // }))
+
+            return vouchers.map(voucher => {
+                switch (voucher.type) {
+                    case "daily":
+                        return {
+                            type: voucher.type,
+                            count: voucher._count.type,
+                            price: "R5"
+                        }
+                    case "weekly":
+                        return {
+                            type: voucher.type,
+                            count: voucher._count.type,
+                            price: "R30"
+                        }
+                    case "monthly":
+                        return {
+                            type: voucher.type,
+                            count: voucher._count.type,
+                            price: "R99"
+                        }
+                }
+            })
         } catch (error) {
             console.error(`Failed to retrieve available vouchers: ${error instanceof Error ? error.message : "Unknown error"}`);
             throw errorHandler(error)

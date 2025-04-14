@@ -28,6 +28,7 @@ type formProps = {
     availableVouchers: {
         type: string;
         count: number;
+        price: string
     }[]
 }
 
@@ -159,10 +160,11 @@ export default function VendorForm({ availableVouchers, vendors }: formProps) {
                                                     <div className="flex items-center space-x-2 rounded-md border p-3 border-pink-200" key={index}>
                                                         <RadioGroupItem value={voucher.type} id={voucher.type} />
                                                         <FormLabel htmlFor={voucher.type} className="flex-1 cursor-pointer font-normal">
-                                                            {voucher.type} ({voucher.count} available)
+                                                            {/* {voucher.type.to()} ({voucher.count} available) */}
+                                                            {/* Capatilize Type */}
+                                                            {voucher.type.charAt(0).toUpperCase() + voucher.type.slice(1)} - {voucher.price} ({voucher.count} Available)
                                                         </FormLabel>
                                                     </div>
-
                                                 ))}
                                             </RadioGroup>
                                         </FormControl>
