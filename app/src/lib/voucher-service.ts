@@ -55,7 +55,17 @@ export class VoucherService {
     async getAvailableVouchers() {
         try {
             // Query which Voucher Types are available and the amount of them
-            return await prisma.$queryRaw`SELECT type, COUNT(*) as count FROM vouchers WHERE is_redeemed = false AND sent = false GROUP BY type`;
+            const vouchers = await prisma.vouchers.groupBy({
+                by: ['type'],
+                where: { is_redeemed: false, sent: false },
+                _count: {
+                    type: true
+                }
+            })
+            return vouchers.map(voucher => ({
+                type: voucher.type,
+                count: voucher._count.type
+            }))
         } catch (error) {
             console.error(`Failed to retrieve available vouchers: ${error instanceof Error ? error.message : "Unknown error"}`);
             throw errorHandler(error)

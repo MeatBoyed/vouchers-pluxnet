@@ -23,9 +23,17 @@ type vendors = {
     created_at: Date | null;
 }
 
-const VoucherTypes = [
-    "daily", "weekly", "monthly"
-]
+type formProps = {
+    vendors: vendors[];
+    availableVouchers: {
+        type: string;
+        count: number;
+    }[]
+}
+
+// const VoucherTypes = [
+//     "daily", "weekly", "monthly"
+// ]
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -45,7 +53,7 @@ const formSchema = z.object({
 // Type for our form values
 type FormValues = z.infer<typeof formSchema>
 
-export default function VendorForm({ vendors }: { vendors: vendors[] }) {
+export default function VendorForm({ availableVouchers, vendors }: formProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [serverError, setServerError] = useState("")
@@ -139,13 +147,22 @@ export default function VendorForm({ vendors }: { vendors: vendors[] }) {
                                         <FormLabel className="text-gray-700">Select Voucher</FormLabel>
                                         <FormControl>
                                             <RadioGroup onValueChange={field.onChange} value={field.value} className="space-y-2">
-                                                {VoucherTypes.map((voucher, index) => (
+                                                {/* {VoucherTypes.map((voucher, index) => (
                                                     <div className="flex items-center space-x-2 rounded-md border p-3 border-pink-200" key={index}>
                                                         <RadioGroupItem value={voucher} id={voucher} />
                                                         <FormLabel htmlFor={voucher} className="flex-1 cursor-pointer font-normal">
                                                             {voucher}
                                                         </FormLabel>
                                                     </div>
+                                                ))} */}
+                                                {availableVouchers.map((voucher, index) => (
+                                                    <div className="flex items-center space-x-2 rounded-md border p-3 border-pink-200" key={index}>
+                                                        <RadioGroupItem value={voucher.type} id={voucher.type} />
+                                                        <FormLabel htmlFor={voucher.type} className="flex-1 cursor-pointer font-normal">
+                                                            {voucher.type} ({voucher.count} available)
+                                                        </FormLabel>
+                                                    </div>
+
                                                 ))}
                                             </RadioGroup>
                                         </FormControl>
