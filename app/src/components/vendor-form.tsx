@@ -13,7 +13,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { sendVoucherToCustomer } from '@/lib/voucher-manager'
 import { isValidPhoneNumber } from "react-phone-number-input"
 import { PhoneInput } from "./ui/phone-input"
-import { vendors } from "@/generated/prisma"
+// import { vendors } from "@/generated/prisma"
+import { vendors } from "@prisma/client"
 import Link from "next/link"
 import { toast } from "sonner"
 

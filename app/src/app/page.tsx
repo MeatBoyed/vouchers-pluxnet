@@ -1,8 +1,7 @@
 import VendorForm from "@/components/vendor-form";
 import { VoucherService } from "@/lib/voucher-service";
-import Image from "next/image";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const voucherService = new VoucherService();
