@@ -6,6 +6,8 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const voucherService = new VoucherService();
   const vendors = await voucherService.getVendors();
+  const vouchers = await voucherService.getAvailableVouchers();
+  console.log("Available Vouchers: ", vouchers);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-pink-50">

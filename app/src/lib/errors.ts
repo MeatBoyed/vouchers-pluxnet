@@ -1,4 +1,4 @@
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 // Custom Error Class
 export class MBVError extends Error {

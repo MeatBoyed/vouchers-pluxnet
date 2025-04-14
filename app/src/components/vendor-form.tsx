@@ -13,11 +13,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { sendVoucherToCustomer } from '@/lib/voucher-manager'
 import { isValidPhoneNumber } from "react-phone-number-input"
 import { PhoneInput } from "./ui/phone-input"
-// import { vendors } from "@/generated/prisma"
-import { vendors } from "@prisma/client"
 import Link from "next/link"
 import { toast } from "sonner"
-import { MBVError } from "@/lib/errors"
+
+type vendors = {
+    name: string;
+    id: string;
+    phone_number: string | null;
+    created_at: Date | null;
+}
 
 const VoucherTypes = [
     "daily", "weekly", "monthly"
@@ -78,15 +82,18 @@ export default function VendorForm({ vendors }: { vendors: vendors[] }) {
 
         } catch (error) {
             console.error(error);
-            if (error instanceof MBVError) {
-                toast.error("Failed to send voucher", {
-                    description: `${error.code} - ${error.message}`,
-                })
-            } else {
-                toast.error("Failed to send voucher", {
-                    description: "An error occurred while sending the voucher. Please try again. If the error persists please contact our support team.",
-                })
-            }
+            // if (error instanceof MBVError) {
+            //     toast.error("Failed to send voucher", {
+            //         description: `${error.code} - ${error.message}`,
+            //     })
+            // } else {
+            //     toast.error("Failed to send voucher", {
+            //         description: "An error occurred while sending the voucher. Please try again. If the error persists please contact our support team.",
+            //     })
+            // }
+            toast.error("Failed to send voucher", {
+                description: "An error occurred while sending the voucher. Please try again. If the error persists please contact our support team.",
+            })
             setServerError(error instanceof Error ? error.message : "An Unexpected error occured.");
         } finally {
             setIsSubmitting(false);
