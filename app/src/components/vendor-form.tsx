@@ -7,13 +7,14 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Check, Wifi } from "lucide-react"
+import { Check, } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { sendVoucherToCustomer } from '@/lib/voucher-manager'
 import { isValidPhoneNumber } from "react-phone-number-input"
 import { PhoneInput } from "./ui/phone-input"
 import Link from "next/link"
+import Image from "next/image"
 import { toast } from "sonner"
 
 type vendors = {
@@ -112,14 +113,14 @@ export default function VendorForm({ availableVouchers, vendors }: formProps) {
 
     return (
         <div className="flex flex-col items-center justify-center w-full">
-            <div className="flex items-center mb-8 mt-4">
-                <Wifi className="h-10 w-10 text-pink-600 mr-2" />
-                <h1 className="text-3xl font-bold text-pink-600">PluxNet Fibre</h1>
+            <div className="flex items-center mb-8 mt-4 flex-col">
+                <Image src="/logo_blue.png" alt="Logo" width={200} height={150} />
+                <h1 className="text-3xl font-bold text-pink-600">Voucher Portal</h1>
             </div>
 
             <Card className="w-full p-0 max-w-md border-pink-200 shadow-lg">
                 <CardHeader className="bg-pink-600 text-white rounded-t-lg py-3">
-                    <CardTitle className="text-xl">Vendor Portal</CardTitle>
+                    <CardTitle className="text-xl">Vouchers Loader</CardTitle>
                     <CardDescription className="text-pink-100">Enter customer details to send a hotspot voucher</CardDescription>
                 </CardHeader>
 

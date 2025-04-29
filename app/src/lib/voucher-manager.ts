@@ -1,17 +1,6 @@
 "use server"
 import { VoucherService } from './voucher-service';
 
-// const smsApiSend = async (phoneNumber: string, code: string) => {
-//     // Replace with actual SMS/WhatsApp integration
-//     try {
-//         console.log(`Sending SMS: ${code} to ${phoneNumber}`);
-//         // Simulate success response
-//         return { success: true };
-//     } catch (err) {
-//         throw new Error(`SMS service failed: ${err.message}`);
-//     }
-// };
-
 const smsApiSend = async (phoneNumber: string, voucherCode: string) => {
     const message = `Your voucher code is: ${voucherCode} - PluxNet Voucher`;
     try {
