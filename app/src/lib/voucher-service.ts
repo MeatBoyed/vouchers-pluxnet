@@ -67,7 +67,6 @@ export class VoucherService {
             //     count: voucher._count.type
             // }))
             if (!vouchers || vouchers.length === 0) return []
-            // @ts-expect-error
             return vouchers.map(voucher => {
                 switch (voucher.type) {
                     case "daily":
